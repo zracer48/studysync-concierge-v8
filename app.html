@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudySync Planner MVP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+
+  <header class="app-header">
+    <nav class="app-nav">
+      <a class="brand" href="index.html">
+        <span class="logo-mark">🎓</span>
+        <span>
+          <strong>StudySync</strong>
+          <small>Planner MVP</small>
+        </span>
+      </a>
+      <div class="nav-actions">
+        <a class="btn secondary small" href="index.html">Landing Page</a>
+        <a class="btn secondary small" href="focus-dock.html">Product MVP</a>
+        <a class="btn primary small" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSdJgZQR3I02ws2I6Ml8LDnDIbY3cP5XOLioHoiaAB8LuWXSCg/viewform?usp=header">Give Updated Feedback</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <section class="app-hero">
+      <div>
+        <div class="pill">Final feasibility MVP</div>
+        <h1>Build a weekly study plan in minutes.</h1>
+        <p>
+          Enter your classes, upcoming deadlines, stress level, and preferred study time.
+          StudySync generates a simple plan with study blocks, deadline priority labels, reminder suggestions, and a lightweight early-access waitlist. This final version reflects 20 completed tester responses and updated feasibility findings.
+        </p>
+      </div>
+      <div class="hero-card">
+        <span>📈</span>
+        <strong>Feasibility Goal</strong>
+        <p>Use the final MVP to demonstrate software feasibility, validated engagement, and next-step feature priorities from 20 completed user responses.</p>
+      </div>
+    </section>
+
+    <section class="mvp-grid">
+      <form id="plannerForm" class="panel planner-form">
+        <span class="label">Step 1</span>
+        <h2>Tell StudySync about your week</h2>
+
+        <label for="studentName">Name</label>
+        <input id="studentName" name="studentName" type="text" placeholder="Tim" value="Tim" required>
+
+        <label for="classes">Classes or subjects</label>
+        <textarea id="classes" name="classes" rows="3" placeholder="Example: Marketing, Accounting, Business Law" required>Marketing, Accounting, Business Law</textarea>
+
+        <label for="deadlines">Upcoming exams, projects, or assignments</label>
+        <textarea id="deadlines" name="deadlines" rows="3" placeholder="Example: Accounting quiz Friday, Marketing project Sunday" required>Accounting quiz Friday, Marketing project Sunday, Business Law reading Wednesday</textarea>
+
+        <div class="two-col">
+          <div>
+            <label for="hours">Available study hours this week</label>
+            <input id="hours" name="hours" type="number" min="1" max="40" value="10" required>
+          </div>
+          <div>
+            <label for="stress">Stress level</label>
+            <select id="stress" name="stress" required>
+              <option value="Low">Low</option>
+              <option value="Moderate" selected>Moderate</option>
+              <option value="High">High</option>
+              <option value="Extreme">Extreme</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="studyTime">Preferred study time</label>
+        <select id="studyTime" name="studyTime" required>
+          <option value="Morning">Morning</option>
+          <option value="Afternoon" selected>Afternoon</option>
+          <option value="Evening">Evening</option>
+          <option value="Mixed">Mixed / flexible</option>
+        </select>
+
+        <label for="support">Preferred accountability support</label>
+        <select id="support" name="support" required>
+          <option value="Text reminders" selected>Text reminders</option>
+          <option value="Email check-ins">Email check-ins</option>
+          <option value="Weekly video call">Weekly video call</option>
+          <option value="App notifications">App notifications</option>
+          <option value="Group chat">Group chat</option>
+        </select>
+
+        <button class="btn primary full" type="submit">Generate My Updated Study Plan</button>
+
+        <div class="iteration-note">
+          <strong>Final feasibility update:</strong> The planner now shows priority levels, workload metrics, calendar placeholders, waitlist capture, and local engagement tracking based on user feedback.
+        </div>
+      </form>
+
+      <section class="panel result-panel" aria-live="polite">
+        <span class="label">Step 2</span>
+        <h2>Your StudySync Plan</h2>
+        <div id="emptyState" class="empty-state">
+          <div>🗓️</div>
+          <p>Your personalized plan will appear here after you generate it.</p>
+        </div>
+        <div id="planResult" class="plan-result hidden"></div>
+        <div id="resultActions" class="result-actions hidden">
+          <button id="copyPlan" class="btn secondary" type="button">Copy Plan</button>
+          <a id="feedbackLink" class="btn primary" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSdJgZQR3I02ws2I6Ml8LDnDIbY3cP5XOLioHoiaAB8LuWXSCg/viewform?usp=header">Take Updated Feedback Survey</a>
+        </div>
+      </section>
+    </section>
+
+
+    <section class="panel metrics-panel">
+      <div class="section-heading compact-heading">
+        <span class="label">MVP Validation</span>
+        <h2>Local engagement tracker</h2>
+        <p>These counters show live interaction during testing. Final survey results also showed 20 completed responses, 90% weekly use interest, and 100% launch-update interest.</p>
+      </div>
+      <div class="metrics-grid">
+        <article><strong id="plansGenerated">0</strong><span>Plans Generated</span></article>
+        <article><strong id="feedbackClicks">0</strong><span>Feedback Clicks</span></article>
+        <article><strong id="waitlistCount">0</strong><span>Waitlist Sign-Ups</span></article>
+        <article><strong id="copyCount">0</strong><span>Copied Plans</span></article>
+      </div>
+    </section>
+
+    <section class="panel waitlist-panel">
+      <div>
+        <span class="label">Early Access</span>
+        <h2>Join the StudySync waitlist</h2>
+        <p>User testing showed strong interest in launch updates, accountability support, calendar integration, and text reminders. This final MVP captures early adopter interest before directing users to the feedback survey.</p>
+      </div>
+      <form id="waitlistForm" class="waitlist-form">
+        <label for="waitlistName">Name</label>
+        <input id="waitlistName" name="waitlistName" type="text" placeholder="Your name" required>
+        <label for="waitlistEmail">Email</label>
+        <input id="waitlistEmail" name="waitlistEmail" type="email" placeholder="you@example.com" required>
+        <button class="btn primary full" type="submit">Join Early Access List</button>
+        <p id="waitlistMessage" class="form-message hidden">Thanks — you have been added to the StudySync early access list for this test round.</p>
+      </form>
+    </section>
+
+    <section class="panel insight-panel">
+      <div class="section-heading">
+        <span class="label">Step 3</span>
+        <h2>Why this MVP matters</h2>
+        <p>
+          The original research showed that students wanted help with accountability, stress management,
+          time management, and personalized planning. This prototype tests those exact features in software form.
+        </p>
+      </div>
+      <div class="insight-grid">
+        <article><strong>📅 Plan</strong><span>Turn class and deadline information into a weekly study schedule.</span></article>
+        <article><strong>🚦 Prioritize</strong><span>Show high, medium, and low priority labels based on deadlines and workload.</span></article>
+        <article><strong>✅ Check In</strong><span>Recommend accountability reminders based on student preference.</span></article>
+        <article><strong>💬 Learn</strong><span>Collect final feasibility feedback from beta testers and early adopters.</span></article>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <span class="label light">Feedback Mechanism</span>
+      <h2>Done testing the planner?</h2>
+      <p>Share whether the priority labels, workload metrics, reminder options, and calendar placeholder make the MVP useful enough for future development.</p>
+      <a class="btn white" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSdJgZQR3I02ws2I6Ml8LDnDIbY3cP5XOLioHoiaAB8LuWXSCg/viewform?usp=header">Give Updated Feedback</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>StudySync Concierge Software MVP | Landing Page → Software MVP → Feedback Survey</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
